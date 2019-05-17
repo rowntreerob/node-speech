@@ -29,7 +29,7 @@ Standard submodule not used to avoid dragging in emscripten which would needless
 [firebase SDK](https://firebase.google.com/docs/admin/setup/#add_the_sdk)
 
     firebase steps 1, 2 from first above link. setup your FB project
-    firebase SDK link ,
+    firebase SDK link , 'Add the SDK' steps , then: see 'Initialize the SDK'
       see 'To generate a private key file for your service account' and 3 steps to
       create/ download the file-key for express server side.
       Rename/move file-key download to 'src/js/service-account.json'
@@ -38,12 +38,23 @@ Standard submodule not used to avoid dragging in emscripten which would needless
 
 [functions steps](https://firebase.google.com/docs/functions/get-started)
 
-    steps  1, 2 in above link
-    manual move  - src/js/cloud/index.js to functions folder created during above
+    steps  1, 2 in above link will create 'functions' directory
+    manual move  - src/js/cloud/index.js to 'functions' folder created during above
+    manual code edits to configure the Firebase bucketName in "FIXME"
+      fix src/server/server-dev.js
+      fix functions/index.js
+
+[Cloud Speech API](https://console.cloud.google.com/apis/dashboard)
+
+    GoogleCloud Speech API needs to be enabled in the Services console        
+    visit link above , then on toolbar, select your project (Firebase)     
+    click "enable apis and services"
+    search for api "cloud-speech-to-text"  and enable it
+    'service-account.json' credential now covers both FB and Speech.
 
     npm run buildDev        // for development
         // OR
-    npm run buildProd
+    npm run buildProd       // not implemented yet
 
     npm start               // navigate to localhost:8080 for local dev
 
