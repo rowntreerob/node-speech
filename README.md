@@ -8,6 +8,8 @@ Intended use. As a webView component where the input photo is displayed with mic
 
 When you run `npm run buildDev`, it builds version that can then be run with `npm run start`.
 
+![alt text](https://github.com/rowntreerob/node-speech/raw/master/src/img/node-speech-blurb.png "UI and DB scheme")
+
 
 ## Recorder and Opus encoding from submodule
 
