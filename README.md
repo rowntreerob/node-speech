@@ -47,10 +47,13 @@ Standard submodule not used to avoid dragging in emscripten which would needless
 [Cloud Speech API](https://console.cloud.google.com/apis/dashboard)
 
     GoogleCloud Speech API needs to be enabled in the Services console        
-    visit link above , then on toolbar, select your project (Firebase)     
+    visit link above , main menu select 'APIs and Services'
+    then on toolbar, select your project (Firebase)     
     click "enable apis and services"
     search for api "cloud-speech-to-text"  and enable it
     'service-account.json' credential now covers both FB and Speech.
+
+[Cloud Speech background](https://github.com/googleapis/nodejs-speech) if there are issues
 
     npm run buildDev        // for development
         // OR
