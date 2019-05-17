@@ -1,6 +1,13 @@
 node_modules
+functions
+*.min.*
+service-account.json
+credentials.json
+firebase.json
+configs
+logger.js
 .DS_Store
 dist
-
+.firebaserc
 Coverage
 coverage

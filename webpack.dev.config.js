@@ -1,14 +1,16 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+// npm i the above
 module.exports = {
   entry: {
-    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js']
+    main:  './src/index.js'
   },
   output: {
+
     path: path.join(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '',
     filename: '[name].js'
   },
   mode: 'development',
@@ -25,16 +27,28 @@ module.exports = {
           emitWarning: true,
           failOnError: false,
           failOnWarning: false
+
         }
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
+        exclude: [/node_modules/],
+        use: {
+          loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env',{"targets": { node: "10" }}],
+              ],
+              "plugins": [
+                ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                ["@babel/plugin-syntax-dynamic-import"],
+              ],
+            }
+        }
       },
       {
         // Loads the javacript into html template provided.
-        // Entry point is set below in HtmlWebPackPlugin in Plugins 
+        // Entry point is set below in HtmlWebPackPlugin in Plugins
         test: /\.html$/,
         use: [
           {
@@ -43,7 +57,7 @@ module.exports = {
           }
         ]
       },
-      { 
+      {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ]
       },
@@ -59,7 +73,15 @@ module.exports = {
       filename: "./index.html",
       excludeChunks: [ 'server' ]
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    //fileName of service account json matches serviceAccount def in js
+    // bin/confs.sh  gets 'min.js' files (3) from git submodule
+    new CopyWebpackPlugin([
+      { from: 'src/js/service-account.json', to: ''},
+      { from: 'src/js/service-account.json', to: '../functions'},
+      { from: 'configs/encoderWorker.min.js', to: ''},
+      { from: 'configs/encoderWorker.min.wasm', to: ''},
+      { from: 'configs/recorder.min.js', to: ''}
+]),
+
   ]
 }
